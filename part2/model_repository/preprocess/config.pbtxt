@@ -1,0 +1,19 @@
+name: "preprocess"
+backend: "python"
+input [
+    {
+    name: "pre_in"
+    data_type: TYPE_INT32
+    dims: [ -1, 28, 28 ]
+    }
+]
+
+output [
+    {
+    name: "pre_out"
+    data_type: TYPE_FP32
+    dims: [ -1, 28, 28 ]
+    }
+]
+
+instance_group [{ kind: KIND_CPU }]

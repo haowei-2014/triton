@@ -1,0 +1,58 @@
+name: "ensemble"
+platform: "ensemble"
+input [
+  {
+    name: "input"
+    data_type: TYPE_INT32
+    dims: [ -1, 28, 28 ]
+  }
+]
+output [
+  {
+    name: "output"
+    data_type: TYPE_INT32
+    dims: [ -1 ]
+  }
+]
+ensemble_scheduling {
+  step [
+    {
+      model_name: "preprocess"
+      model_version: -1
+      input_map {
+        key: "pre_in"
+        value: "input"
+      }
+      output_map {
+        			key: "pre_out"
+        			value: "pre_out"
+      		}
+    },
+    {
+      model_name: "mnist"
+      model_version: -1
+      input_map {
+        			key: "mnist_in"
+        			value: "pre_out"
+      		}
+      output_map {
+       				key: "mnist_out"
+        			value: "mnist_out"
+     			}
+    },
+    {
+      model_name: "postprocess"
+      model_version: -1
+      input_map [
+			{
+        			key: "post_in"
+        			value: "mnist_out"
+      			}
+		]
+	output_map {
+       			 	key: "post_out"
+       			 	value: "output"
+     		 	}
+    }
+  ]
+}

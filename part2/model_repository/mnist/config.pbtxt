@@ -1,0 +1,16 @@
+name: "mnist"
+platform: "tensorflow_savedmodel"
+input [
+  {
+    name: "mnist_in"
+    data_type: TYPE_FP32
+    dims: [ -1, 28, 28 ]
+  }
+]
+output [
+  {
+    name: "mnist_out"
+    data_type: TYPE_FP32
+    dims: [ -1, 10 ]
+  }
+]
